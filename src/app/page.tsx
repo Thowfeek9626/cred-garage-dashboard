@@ -1,3 +1,4 @@
+import BenefitsGrid from "./components/BenefitsGrid";
 import UserProfile from "./components/UserProfile";
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
         <h1 className="text-2xl font-bold text-zinc-800 dark:text-white">Dashboard</h1>
       </div>
       <UserProfile />
+      <BenefitsGrid />
     </main>
   );
 }
