@@ -3,13 +3,14 @@
 import { motion } from 'framer-motion';
 import ProfileSkeleton from './ProfileSkeleton';
 import { Profile } from '../types';
+import { useFetchUserProfile } from '../hooks/useFetchUserProfile';
 
-interface UserProfileProps {
-  loading: boolean;
-  profile: Profile | null;
-}
 
-const UserProfile = ({ loading, profile }: UserProfileProps) => {
+const UserProfile = () => {
+  
+  const userId = 'F0E2ZvHF75uuo2BlokZu';
+  const { profile, loading } = useFetchUserProfile(userId);
+
   return (
     <motion.div
       className="p-6 mt-6 bg-white dark:bg-zinc-900 rounded-2xl shadow-lg flex items-center gap-6 max-w-xl mx-auto"
