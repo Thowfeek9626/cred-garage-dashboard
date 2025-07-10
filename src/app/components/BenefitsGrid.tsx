@@ -1,29 +1,47 @@
 'use client';
+
 import { motion } from 'framer-motion';
+import BenefitCard from './BenefitCard';
+import BenefitCardSkeleton from './BenefitCardSkeleton';
+import { useFetchBenefits } from '../hooks/useFetchBenefits';
 
-const benefits = [
-  { title: "10% Off", icon: "🎁", desc: "Save on your next bill", cta: "Claim" },
-  { title: "Movie Tickets", icon: "🎬", desc: "Buy 1 Get 1 Free", cta: "View" },
-  { title: "Gift Cards", icon: "🎉", desc: "Redeem your points", cta: "Claim" }
-];
+const BenefitsGrid = () => {
+  
+  const { benefits, loading, error } = useFetchBenefits();
 
-const BenefitsGrid = () => (
-  <motion.div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
-    {benefits.map((benefit, idx) => (
-      <motion.div
-        key={idx}
-        className="p-5 bg-white dark:bg-zinc-800 rounded-lg shadow hover:shadow-lg transition"
-        whileHover={{ scale: 1.03 }}
-      >
-        <div className="text-4xl mb-2">{benefit.icon}</div>
-        <h3 className="font-bold text-zinc-800 dark:text-white">{benefit.title}</h3>
-        <p className="text-zinc-500 dark:text-zinc-400 text-sm">{benefit.desc}</p>
-        <button className="mt-4 px-3 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600">
-          {benefit.cta}
-        </button>
-      </motion.div>
-    ))}
-  </motion.div>
-);
+  if (loading) {
+    return (
+      <div className="flex flex-wrap gap-6 justify-center my-8 w-full">
+        {[...Array(3)].map((_, idx) => (
+          <BenefitCardSkeleton key={idx} />
+        ))}
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex justify-center my-8 w-full">
+        <div className="text-red-500 dark:text-red-400 text-lg font-semibold">{error}</div>
+      </div>
+    );
+  }
+
+  return (
+    <motion.div
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 max-w-6xl mx-auto"
+      initial="hidden"
+      animate="visible"
+      variants={{
+        visible: { transition: { staggerChildren: 0.15 } },
+        hidden: {},
+      }}
+    >
+      {benefits.map((benefit, idx) => (
+        <BenefitCard benefit={benefit} key={idx}/>
+      ))}
+    </motion.div>
+  );
+};
 
 export default BenefitsGrid;
