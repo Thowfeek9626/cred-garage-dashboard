@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import ProfileSkeleton from './ProfileSkeleton';
-import { Profile } from '../types';
 import { useFetchUserProfile } from '../hooks/useFetchUserProfile';
 
 
