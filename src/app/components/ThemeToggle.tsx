@@ -24,7 +24,7 @@ const ThemeToggle = () => {
       onClick={toggle}
       aria-label="Toggle Dark Mode"
       style={{cursor:'pointer'}}
-      className="flex items-center space-x-2 px-4 py-2 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-800 dark:text-white hover:bg-indigo-600 hover:text-white transition"
+      className="flex items-center space-x-2 px-4 py-2 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-800 dark:text-white hover:bg-teal-500 hover:text-white transition"
     >
       {dark ? <SunIcon className="w-5 h-5" /> : <MoonIcon className="w-5 h-5" />}
     </button>

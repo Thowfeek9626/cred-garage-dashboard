@@ -11,6 +11,16 @@
   --foreground: #ffffff; /* white text in dark mode */
 }
 
+/* For light background (dark icon) */
+.img-light {
+  filter: none; /* original black/dark icon */
+}
+
+/* For dark background (light icon) */
+.img-dark {
+  filter: invert(100%) brightness(150%);
+}
+
 
 @theme inline {
   --color-background: var(--background);

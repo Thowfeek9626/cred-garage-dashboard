@@ -1,10 +1,12 @@
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+
 export type Benefit = {
-  id:string,
-    title: string;
-    icon: string;
-    desc: string;
-    cta: string;
-  };
+  id:string;
+  icon: IconProp;
+  title: string;
+  desc: string;
+  cta: string;
+}
 
   export type Reward = {
     id:string;
