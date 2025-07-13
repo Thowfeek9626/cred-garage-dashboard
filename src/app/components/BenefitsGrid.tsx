@@ -3,11 +3,12 @@
 import { motion } from 'framer-motion';
 import BenefitCard from './BenefitCard';
 import BenefitCardSkeleton from './BenefitCardSkeleton';
-import { useFetchBenefits } from '../hooks/useFetchBenefits';
+import { useFetchCollection } from '../hooks/useFetchBenefits';
+import { Benefit } from '../types';
 
 const BenefitsGrid = () => {
   
-  const { benefits, loading, error } = useFetchBenefits();
+  const { data:benefits, loading, error } = useFetchCollection<Benefit>('benefits');
 
   if (loading) {
     return (

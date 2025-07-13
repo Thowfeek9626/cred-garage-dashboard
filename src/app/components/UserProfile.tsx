@@ -11,12 +11,12 @@ const UserProfile = () => {
   const { profile, loading } = useFetchUserProfile(userId);
 
   return (
-    <motion.div
-      className="p-6 mt-6 bg-white dark:bg-zinc-900 rounded-2xl shadow-lg flex items-center gap-6 max-w-xl mx-auto"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
+<motion.div
+  className="p-6 mt-6 bg-zinc-100 dark:bg-black rounded-2xl shadow-lg flex items-center gap-6 max-w-xl mx-auto"
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5 }}
+>
       {loading || !profile ? (
         <ProfileSkeleton />
       ) : (

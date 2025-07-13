@@ -2,13 +2,15 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #f1efeb;
-  --foreground: #171717;
+  --background: #f4f4f5; /* matches Tailwind's zinc-100 */
+  --foreground: #000000; /* matches Tailwind's zinc-900 */
 }
+
 .dark {
-  --background: #000000; /* dark mode bg */
-  --foreground: #ededed;
+  --background: #000000; /* matches Tailwind's zinc-900 */
+  --foreground: #ffffff; /* white text in dark mode */
 }
+
 
 @theme inline {
   --color-background: var(--background);
