@@ -5,12 +5,16 @@ import { useEffect } from 'react';
 import { Reward } from '../types';
 import { useFetch } from '../hooks/useFetch';
 import RewardSkeleton from './RewardSkeleton';
+import { useAuth } from '../hooks/useAuth';
 
 const circumference = 2 * Math.PI * 45;
 
 const RewardPoints = () => {
-  const { data, loading } = useFetch<Reward>('rewards', 'document');
+  const { user, loading: authLoading } = useAuth();
+
+  const { data, loading, error } = useFetch<Reward>('rewards', 'document', user?.uid);
   const reward = data as Reward | null;
+
   const controls = useAnimation();
 
   useEffect(() => {
@@ -18,6 +22,7 @@ const RewardPoints = () => {
       controls.set({ strokeDashoffset: circumference });
       return;
     }
+
     const maxPoints = reward.totalXP;
     const points = reward.currentXp;
     const progress = Math.min(points / maxPoints, 1);
@@ -27,7 +32,10 @@ const RewardPoints = () => {
     controls.start({ strokeDashoffset });
   }, [reward, controls]);
 
-  if (loading || !reward) return <RewardSkeleton />;
+  if (authLoading || loading) return <RewardSkeleton />;
+  if (!user) return <div>Please login to see your rewards.</div>;
+  if (error) return <div className="text-red-500">Error: {error}</div>;
+  if (!reward) return <RewardSkeleton />;
 
   return (
     <motion.div
@@ -38,15 +46,15 @@ const RewardPoints = () => {
     >
       <h2 className="text-xl font-semibold text-zinc-900 dark:text-white mb-4">Reward Points</h2>
       <svg className="w-28 h-28" viewBox="0 0 100 100">
-        {/* Background circle */}
         <circle
-          cx="50" cy="50" r="45"
+          cx="50"
+          cy="50"
+          r="45"
           stroke="#ddd"
           strokeWidth="10"
           fill="none"
           className="dark:stroke-zinc-700"
         />
-        {/* Progress circle */}
         <motion.circle
           cx="50"
           cy="50"
@@ -69,7 +77,7 @@ const RewardPoints = () => {
           fontSize="18"
           className="font-semibold fill-teal-600 dark:fill-cyan-400"
         >
-          {reward?.currentXp?.toLocaleString()}
+          {reward.currentXp.toLocaleString()}
         </text>
         <text
           x="50"
@@ -79,7 +87,7 @@ const RewardPoints = () => {
           fill="#6b7280"
           className="dark:fill-zinc-400"
         >
-          / {reward?.totalXP?.toLocaleString()} XP
+          / {reward.totalXP.toLocaleString()} XP
         </text>
       </svg>
     </motion.div>

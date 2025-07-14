@@ -26,31 +26,37 @@ export const useAuth = () => {
 
   const signup = async (email: string, password: string, fullName: string) => {
     setError(null);
-
+  
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-
+  
       await setDoc(doc(db, 'users', user.uid), {
         fullName,
         email,
         createdAt: new Date().toISOString(),
         level: 1,
-        progress: 2,
+        progress: 20,
       });
-
+  
       await setDoc(doc(db, 'rewards', user.uid), {
         userId: user.uid,
         totalXP: 10000,
         currentXp: 5000,
       });
-
+  
+      setUser(user);
+  
       localStorage.setItem('isLoggedIn', 'true');
+  
+      return user;
     } catch (err: any) {
       setError(err.message || 'Signup failed. Please try again.');
       throw err;
     }
   };
+  
+  
 
   const login = async (email: string, password: string) => {
     setError(null);

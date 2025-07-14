@@ -120,9 +120,12 @@ const SignupForm = ({ onSignup }: SignupFormProps) => {
           disabled={loading}
           className={`w-full py-3 px-4 font-semibold rounded-lg shadow transition ${
             loading ? 'bg-pink-400 cursor-not-allowed' : 'bg-pink-600 hover:bg-pink-700 text-white'
-          }`}
+          } flex justify-center items-center`}
         >
-          {loading ? <Spinner /> : 'Create Account'}
+            <div className="w-27 flex justify-center">
+            {loading ? <Spinner /> : 'Sign Up'}
+  </div>
+
         </motion.button>
       </motion.form>
     </>

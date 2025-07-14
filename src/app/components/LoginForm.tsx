@@ -83,7 +83,7 @@ const LoginForm = ({ onLogin }: LoginFormProps) => {
     loading ? 'bg-indigo-400 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-700 text-white'
   } flex justify-center items-center`}
 >
-  <div className="w-24 flex justify-center">
+  <div className="w-27 flex justify-center">
     {loading ? <Spinner /> : 'Sign In'}
   </div>
 </motion.button>

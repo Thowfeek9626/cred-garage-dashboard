@@ -34,7 +34,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-b from-zinc-100 via-white to-zinc-200 dark:from-black dark:via-zinc-900 dark:to-black text-zinc-900 dark:text-white">
+    <div className="flex flex-col min-h-screen bg-gradient-to-b from-zinc-100 via-white to-zinc-200 dark:from-black dark:via-black dark:to-black text-zinc-900 dark:text-white">
       {/* Header */}
       <header className="w-full border-b border-zinc-200 dark:border-zinc-800 shadow-sm backdrop-blur bg-white/60 dark:bg-zinc-900/60 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
