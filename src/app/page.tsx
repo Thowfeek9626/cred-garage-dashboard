@@ -56,7 +56,7 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="flex-1 flex items-center justify-center px-4 py-12">
+      <main className="flex-1 flex items-center justify-center px-4 py-6">
         {!user && !isAuthenticated ? (
           <div className="w-full max-w-md p-6 rounded-2xl shadow-xl backdrop-blur-md bg-white/60 dark:bg-zinc-900/70">
             {showSignup ? (
