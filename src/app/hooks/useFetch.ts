@@ -17,7 +17,6 @@ export const useFetch = <T extends { id: string }>(
 
   useEffect(() => {
     let isSubscribed = true;
-    let timeout: NodeJS.Timeout;
 
     const fetchData = async (finalDocId?: string) => {
       try {
@@ -79,10 +78,10 @@ export const useFetch = <T extends { id: string }>(
             setLoading(false);
           }
         });
+
         return () => {
           isSubscribed = false;
           unsubscribe();
-          clearTimeout(timeout);
         };
       }
     } else {
@@ -91,7 +90,6 @@ export const useFetch = <T extends { id: string }>(
 
     return () => {
       isSubscribed = false;
-      clearTimeout(timeout);
     };
   }, [collectionName, mode, docId, delayMs]);
 
