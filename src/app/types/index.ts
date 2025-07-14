@@ -17,10 +17,8 @@ export type Benefit = {
 
   export type Profile = {
     id:string,
-    name: string;
-    role: string;
+    fullName: string;
     level?: number;
-    avatar:string,
-    progress?: number;
-    rewards?: Reward
+    progress: number;
+    email:string;
   };

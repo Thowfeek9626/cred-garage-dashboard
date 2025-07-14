@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { auth } from '../../lib/firebase';
+import { auth, db } from '@/lib/firebase';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -7,6 +6,8 @@ import {
   onAuthStateChanged,
   User,
 } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
 
 export const useAuth = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -23,16 +24,43 @@ export const useAuth = () => {
     return () => unsubscribe();
   }, []);
 
-  const signup = async (email: string, password: string) => {
+  const signup = async (email: string, password: string, fullName: string) => {
     setError(null);
-    await createUserWithEmailAndPassword(auth, email, password);
-    localStorage.setItem('isLoggedIn', 'true');
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      await setDoc(doc(db, 'users', user.uid), {
+        fullName,
+        email,
+        createdAt: new Date().toISOString(),
+        level: 1,
+        progress: 2,
+      });
+
+      await setDoc(doc(db, 'rewards', user.uid), {
+        userId: user.uid,
+        totalXP: 10000,
+        currentXp: 5000,
+      });
+
+      localStorage.setItem('isLoggedIn', 'true');
+    } catch (err: any) {
+      setError(err.message || 'Signup failed. Please try again.');
+      throw err;
+    }
   };
 
   const login = async (email: string, password: string) => {
     setError(null);
-    await signInWithEmailAndPassword(auth, email, password);
-    localStorage.setItem('isLoggedIn', 'true');
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      localStorage.setItem('isLoggedIn', 'true');
+    } catch (err: any) {
+      setError(err.message || 'Login failed. Please try again.');
+      throw err;
+    }
   };
 
   const logout = async () => {

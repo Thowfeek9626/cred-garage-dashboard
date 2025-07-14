@@ -1,16 +1,30 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import {
+  CheckIcon,
+  EnvelopeIcon,
+  DocumentDuplicateIcon,
+} from '@heroicons/react/24/outline';
+import { useState } from 'react';
 import ProfileSkeleton from './ProfileSkeleton';
 import { useFetch } from '../hooks/useFetch';
 import { Profile } from '../types';
 
-
 const UserProfile = () => {
-
-  const userId = 'F0E2ZvHF75uuo2BlokZu';
-  const { data, loading } = useFetch<Profile>('users', 'document', userId);
+  const { data, loading } = useFetch<Profile>('users', 'document');
   const profile = data as Profile | null;
+  const [copied, setCopied] = useState(false);
+
+  const copyToClipboard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
 
   return (
     <motion.div
@@ -33,21 +47,37 @@ const UserProfile = () => {
               shadow-lg
               border-2 border-zinc-300 dark:border-zinc-700
 
-              /* Larger avatar and more shadow on mobile */
               mb-4
               sm:mb-0 sm:w-20 sm:h-20 sm:text-3xl sm:font-bold sm:shadow-md sm:border
             `}
           >
-            {profile.name?.charAt(0).toUpperCase() || 'U'}
+            {profile.fullName?.charAt(0).toUpperCase() || 'U'}
           </div>
-
 
           <div className="flex-1">
             <h2 className="text-2xl font-semibold text-zinc-800 dark:text-white">
-              {profile.name}
+              {profile.fullName}
             </h2>
+
+            <div className="flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400 my-1">
+              <EnvelopeIcon className="h-5 w-5" />
+              <span>{profile.email}</span>
+              <motion.button
+                whileTap={{ scale: 0.9, rotate: -10 }}
+                onClick={() => copyToClipboard(profile.email)}
+                className="hover:text-teal-500 transition"
+                aria-label="Copy email"
+              >
+                {copied ? (
+                  <CheckIcon className="w-4 h-4 text-green-500" />
+                ) : (
+                  <DocumentDuplicateIcon className="w-4 h-4" />
+                )}
+              </motion.button>
+            </div>
+
             <p className="text-sm font-medium text-teal-600 dark:text-cyan-300 mb-3">
-              Lv.{profile.level ?? 'Level 1'}
+              Lv.{profile.level ?? '1'}
             </p>
 
             <div className="w-full bg-zinc-200 dark:bg-zinc-800 rounded-full h-3 overflow-hidden shadow-inner">
@@ -57,9 +87,7 @@ const UserProfile = () => {
                 animate={{ width: `${profile.progress ?? 0}%` }}
                 transition={{ duration: 1, ease: 'easeOut' }}
               />
-
             </div>
-
           </div>
         </>
       )}

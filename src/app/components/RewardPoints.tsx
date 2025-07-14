@@ -9,7 +9,7 @@ import RewardSkeleton from './RewardSkeleton';
 const circumference = 2 * Math.PI * 45;
 
 const RewardPoints = () => {
-  const { data, loading } = useFetch<Reward>('rewards', 'document', 'RJz9ZtjgO96FNCPy9M6H');
+  const { data, loading } = useFetch<Reward>('rewards', 'document');
   const reward = data as Reward | null;
   const controls = useAnimation();
 
