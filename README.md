@@ -4,7 +4,7 @@ A modern, responsive dashboard inspired by **CRED Garage**, built using **React*
 
 ## 💻 Tech Stack
 
-- **React** – Component-based UI library
+- **React** – Next.js framework
 - **TailwindCSS** – Utility-first CSS framework for rapid UI development
 - **Framer Motion** – For smooth animations and transitions
 - **Heroicons** – Icon set designed for modern UIs
