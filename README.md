@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚗 CRED Garage-Inspired Dashboard
 
-## Getting Started
+A modern, responsive dashboard inspired by **CRED Garage**, built using **React**, **TailwindCSS**, and **Framer Motion**. The project demonstrates best practices in frontend development with a focus on UX, animation, and responsive design.
 
-First, run the development server:
+## 💻 Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **React** – Component-based UI library
+- **TailwindCSS** – Utility-first CSS framework for rapid UI development
+- **Framer Motion** – For smooth animations and transitions
+- **Heroicons** – Icon set designed for modern UIs
+- **LocalStorage** – For persisting theme and authentication state
+- **Custom Hooks** – `useAuth` and `useFetch` for logic separation
+- **Mock Authentication** – Local login/signup simulation
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ⚙️ Setup Instructions
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/your-username/cred-garage-dashboard.git
+   cd cred-garage-dashboard
+2. **Install Dependencies**
+   npm install
+3. **Run the App**
+   npm run dev
+4.**Open in Browser**
+   http://localhost:3000
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+✨ **Features Overview**
+👤 **User Profile Summary** :
+-> Avatar based on user name initials
+-> Displays full name, email, XP level
+-> Click-to-copy email feature with feedback
+-> Animated XP progress bar
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+🎁 **Benefits Section**
+Grid of benefit cards with: Icon, Title, Description ,Action Button
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+💎 **Reward Points**
+Radial progress component showing: Current XP, Total XP
 
-## Deploy on Vercel
+🌓 **Dark/Light Theme Toggle**
+-> Toggle button with icon change
+-> Theme state persisted in localStorage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+🔐 **Authentication**
+-> Login & Signup Forms
+-> Local state management using localStorage
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+⏳ **Skeleton Loaders**
+Animated skeletons for: User Profile, Reward Points, Benefits Section
+
+   
